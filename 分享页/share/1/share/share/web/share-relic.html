@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="images/icon-80.png" rel="shortcut icon">
+    <title>赛导游</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+   <!--  CSS -->
+	<style>
+		* {margin: 0;padding: 0;border: 0;}
+		html,body {background: #f5f5f5;overflow-x:hidden;width:100%;}
+		img {margin: 0;padding: 0;}
+		header {width: 100%;position: relative;background: #333;}
+
+		.title {width: 100%;height: 40px;font-size: 16px;line-height: 40px;background: #333;text-align: center;color: #fff;font-weight: 700;}
+		.back {position: absolute;color: white;left: 15px;top: 11px;width: 50px;height: 18px;background: url(...web/images/return.png) no-repeat 0 0;background-size: 9px 18px;background-position: left;}
+		.fonts {margin-left: 15px;}
+		.bgcol-grey {background-color: #333}
+		.col-white {color: #fff}
+		.cultural-relic {position: relative;}
+		.cultural-relic img {display: block;}
+		.cultural-relic div {position: absolute;bottom: 0;left: 0;padding-left: 15px;width: 100%;height: 40px;line-height: 40px;/*color: white;*/font-weight: 700;background: rgba(0, 0, 0, 0.5);opacity: 0.79;}
+		.cultural-relic div p {color: white;z-index: 10;opacity: 1;}
+		.btn {width: 80%;height: 40px;line-height: 40px;font-size: 16px;color: #00B5ED;text-align: center;border: 1px solid #00B5ED;background: #fff;border-radius: 8px;margin: auto;margin: 10px 0;}
+		.btn-cont {text-align: center;background: #fff;}
+
+
+		.navigation {width: 100%;height: 30px;background: #fff;margin-top: 10px;border-top: 1px solid #eee;border-bottom: 1px solid #eee;line-height: 30px;padding-top: 10px;}
+		.navigation-title {margin-left: 10px;height: 20px;border-left: 5px solid #00B5ED;font-size: 18px;line-height: 20px;padding-left: 10px;}
+		.navigation-cont {height: 200px;/*background: #eee;*/}
+		.bgimg {height: 200px;background-image: url(../web/images/地图@2x.png);background-size: auto 200px;position: relative;}
+		.bgimg .cp {width: 100%;height: 54px;line-height: 54px;background-color: white;color:#000;position: absolute;bottom: 0;}
+		.bgimg_top{width: 100%;height: 90px;background-image: url(../web/images/地图－名称框@2x.png);background-repeat: no-repeat;background-size: 50% 80%;background-position: center;position: relative;}
+		.bgimg_top p{position: absolute;top: 33%;left: 31%;}
+		.cp p{font: 28px #000;margin-left: 15px;}
+		.navigation-list {width: 100%;position: relative;background-color:#fff}
+		.navigation-list img {width: 30%;height: 100px;margin-left: 1.8%;vertical-align: middle;margin-top: 10px;}
+		.a{text-align: left;}
+		.navigation-ms{position: relative;width: 100%;}
+		.zj{position: absolute;width: 30%;height: 25px;margin-left: 1.8%;bottom: 0; background-image: url(../web/images/遮罩@2x.png);display: inline-block;border-radius: 8px;}
+		.p1{position: absolute;bottom: 0;height: 20px;line-height: 20px;color:#fff;margin-left: 4%;font-size:14px;}
+		.navigation-ms img{width: 30%;border-radius: 8px;}
+		.zj1{position: absolute;width: 30%;height: 25px;margin-left: 1.8%;bottom: 0; background-image: url(../web/images/遮罩@2x.png);display: inline-block;border-radius: 8px;}
+		.zj2{position: absolute;width: 30%;height: 25px;margin-left: 1.8%;bottom: 0; background-image: url(../web/images/遮罩@2x.png);display: inline-block;border-radius: 8px;}
+		.dleft{width:80%;height:100%;float:left;}
+		.dright{width:18%;height:100%;float:right;}
+		.dright img{width: 33%;height: 45%;float: right;margin-right: 20%;}
+
+
+
+		.btn-cont {padding-top: 10px;}
+		.bgcol-footer{background-color:#f3f3f3;height:40px;font-size:18px; text-align: center;color:#000;}
+		.bgcol-footer a{color:#999;text-decoration: none;padding:10px;height:40px;line-height:40px;}
+		.bgcol-hr{background-color:#fff}
+		.bgcol-float{background-color:#333;height:60px;position:fixed; bottom:0px;width:100%;/*filter:alpha(opacity=60);opacity:0.6;*/}
+		.logo img{margin-left: 15px;margin-top: 8px;height:45px;width:45px;}
+		.float-btn{width: 25%;height: 40px;background-color:#33aacc;text-align: center;border-radius: 8px;color:#fff;font-size:18px;margin: auto;position:absolute;right:15px;margin-top:10px;}
+		.cultural-region{position: relative;width:100%;height:180px;}
+		.tt {width: 100%;text-align: center;margin-top: -62px;position: relative;z-index: 99999;}
+
+		
+		.left { float: left; }
+		.right { float: right; }
+		.clear { clear: both; }
+		#background { background-size: cover; position: fixed; top: 0; left: 0; width: 100%; height: 100%; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; -o-user-select: none; user-select: none; }
+		#player {width: 90%;height: 30px;padding: 0px;margin: 5px auto 40px;position: relative;}
+
+		#player .cover { background: rgba(0, 0, 0, 0.5); border: 1px solid #333; position: absolute; top: 25px; left: 25px; overflow: hidden; -moz-border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -ms-border-radius: 10px; -khtml-border-radius: 10px; border-radius: 10px; width: 130px; height: 130px; -moz-box-shadow: 0 2px 10px black; -webkit-box-shadow: 0 2px 10px black; -o-box-shadow: 0 2px 10px black; box-shadow: 0 2px 10px black; }
+		#player .cover img { -moz-border-radius: 10px; -webkit-border-radius: 10px; -o-border-radius: 10px; -ms-border-radius: 10px; -khtml-border-radius: 10px; border-radius: 10px; width: 130px; height: 130px; }
+		#player .ctrl { margin-left: 0.5%;/* text-shadow: 0 1px 2px #000;*/ line-height: 16px; }
+		#player .ctrl .tag strong, #player .ctrl .tag span { display: block; text-overflow: ellipsis; }
+		#player .ctrl .tag span { font-size: 12px; margin-top: 5px; color: #ccc; }
+		#player .ctrl .icon { background-repeat: no-repeat; background-position: center; display: inline-block; /*opacity: 0.6;*/ cursor: pointer; width: 24px; height: 24px; -moz-transition: 0.3s; -webkit-transition: 0.3s; -o-transition: 0.3s; transition: 0.3s; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none; -o-user-select: none; user-select: none; }
+		#player .ctrl .icon:hover, #player .ctrl .icon.enable { opacity: 1; }
+		#player .ctrl .icon:active { opacity: 0.3; }
+		#player .ctrl .control { margin-top: 10px; height: 25px; }
+		#player .ctrl .control .playback { background-image: url(../web/images/play1.png); }
+		#player .ctrl .control .playback.playing { background-image: url(../web/images/pause1.png); }
+		#player .ctrl .control .volume .mute { background-image: url(../web/images/volume1.png); }
+		#player .ctrl .control .volume .mute.enable { background-image: url(../web/images/mute1.png); }
+		#player .ctrl .control .volume .slider { margin-top: 11px; margin-left: 10px; width: 100px; }
+		#player .ctrl .progress { margin-top: 10px; }
+		#player .ctrl .progress .timer { font-size: 12px; color: #ccc; margin-top: 8px; }
+		#player .ctrl .progress .endtime { font-size: 12px; color: #ccc; margin-top: 8px; }
+		#player .ctrl .progress .repeat, #player .ctrl .progress .shuffle { background-position: center bottom; }
+		#player .ctrl .progress .repeat.once, #player .ctrl .progress .repeat.all { opacity: 1; }
+		#player .ctrl .progress .repeat.once { position: relative; }
+		#player .ctrl .progress .repeat.once:before { content: "1"; position: absolute; top: 3px; right: -2px; font-size: 8px; }
+		.slider { background: /*rgba(0, 0, 0, 0.3)*/#e5e5e5; height: 5px; position: relative; cursor: pointer; -moz-border-radius: 0px; -webkit-border-radius: 0px; -o-border-radius: 0px; -ms-border-radius: 0px; -khtml-border-radius: 0px; border-radius: 0px; -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset; -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset; -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5) inset; }
+		.slider:hover a, .slider.enable a { opacity: 1; }
+		.slider a { background: #fff; margin-left: -2.5px; position: absolute; opacity: 0; width: 5px; height: 5px; -moz-border-radius: 50%; -webkit-border-radius: 50%; -o-border-radius: 50%; -ms-border-radius: 50%; -khtml-border-radius: 50%; border-radius: 50%; -moz-transition: opacity 0.3s; -webkit-transition: opacity 0.3s; -o-transition: opacity 0.3s; transition: opacity 0.3s; }
+		.slider .loaded, .slider .pace { position: absolute; height: 100%; /*opacity: 0.7;*/ -moz-border-radius: 0px; -webkit-border-radius: 0px; -o-border-radius: 0px; -ms-border-radius: 0px; -khtml-border-radius: 0px; border-radius: 0px; }
+		.slider .loaded { background: /*rgba(255, 255, 255, 0.1)*/#e5e5e5; }
+		.slider .pace { background: #33aacc; }
+			
+
+		/* 红圈闪烁*/
+		.container {
+			position: relative;
+			width: 100%;
+			height: 15%;
+			text-align: center;
+			margin-top: 45px;
+		}
+
+		.cir {
+			width: 12px;
+			height: 12px;
+			background-color: red;
+			border-radius: 25px;
+			/*box-shadow: 5px 5px 5px #888888;*/
+			/* position: absolute; */
+			/* margin-top: 0%; */
+			/* left: 47%; */
+			margin: 0 AUTO;
+		}
+
+@keyframes warn {
+            0% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0.0;
+            }
+
+            25% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0.1;
+            }
+
+            50% {
+                transform: scale(0.5);
+                -webkit-transform: scale(0.5);
+                opacity: 0.3;
+            }
+
+            75% {
+                transform: scale(0.8);
+                -webkit-transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(1);
+                -webkit-transform: scale(1);
+                opacity: 0.0;
+            }
+        }
+
+        @keyframes warn1 {
+            0% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0.0;
+            }
+
+            25% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0.1;
+            }
+
+            50% {
+                transform: scale(0.3);
+                -webkit-transform: scale(0.3);
+                opacity: 0.3;
+            }
+
+            75% {
+                transform: scale(0.5);
+                -webkit-transform: scale(0.5);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(0.8);
+                -webkit-transform: scale(0.8);
+                opacity: 0.0;
+            }
+        }
+
+       
+        /* 产生动画（向外扩散变大）的圆圈  */
+		.pulse {
+			/* position: absolute; */
+			width: 12px;
+			height: 12px;
+			/* left: 41%; */
+			top: -58px;
+			border: 25px solid red;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border-radius: 50%;
+			z-index: 1;
+			opacity: 0;
+			-webkit-animation: warn 2s ease-out;
+			-moz-animation: warn 2s ease-out;
+			animation: warn 2s ease-out;
+			-webkit-animation-iteration-count: infinite;
+			-moz-animation-iteration-count: infinite;
+			animation-iteration-count: infinite;
+			box-shadow: 1px 1px 30px red;
+			margin: 0 auto;
+			margin-top: -36px;
+		}
+
+
+	</style>
+	
+	<script src="js/jquery-1.7.2.min.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?40e889c72eadd835b33c57d9a84a6ed9";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+	<!--<header>
+		<div class="back "><div class="fonts">返回</div></div>
+		<div class="title borderBottom">陕西历史博物馆</div>
+	</header>-->
+	<section>
+		<div class="cultural-relic">
+			<img src="images/bg.png" width="100%" height="250px;"/>
+			<div>
+				<p class="cultural-title">试听：文物名称</p>
+			</div>
+		</div>
+		<div class="btn-cont">
+			<!--<audio src="music/郑源 - 为爱停留.mp3" controls="controls"></audio>-->
+			
+			<!--  音频部分-->
+				<div id="player">
+					<div class="ctrl">
+						<div class="control">
+							<div class="left">
+								<div class="playback icon"></div>
+							</div>
+							<div class="volume right">
+								<div class="mute icon left"></div>
+								<div class="slider left">
+									<div class="pace"></div>
+								</div>
+							</div>
+						</div>
+						<div class="progress">
+							<div class="slider">
+								<div class="loaded"></div>
+								<div class="pace"></div>
+							</div>
+							<div class="timer left">0:00</div>
+							<div class="right">
+								<div class="endtime" id="endtime">0:00</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--音频名称 -->
+				<!-- http://cdn.saidaoyou.com/dc2ac5272c39412893fc27f8419e5ddb.mp3      http://cdn.saidaoyou.com/a976d1b924a74bfb9489f72cf9f0475d -->
+				<input type="hidden" id="audioplayer" value="http://cdn.saidaoyou.com/dc2ac5272c39412893fc27f8419e5ddb.mp3"/>
+			<!--音频部分结束-->
+			
+			
+			
+			<button class="btn" type="button">打开APP,不止是试听</button>
+		</div>
+		<div class="navigation">
+			<div class="navigation-title">地图导览</div>
+		</div>
+		<div class="navigation-cont">
+			<div class="bgimg" style="width:100%;">
+				<div class="bgimg_top"></div>
+				<div class="tt"><p>试听音频文物名称</p></div>
+				<div class="container">
+					<div class="cir"></div>  
+					<div class="pulse"></div>
+				</div>
+				<div class="cp"><p>导览地图，边看边听，景区精彩全知道</p></div>
+			</div>
+		</div>
+		<div class="navigation">
+			<div class="navigation-title">更多精彩</div>
+		</div>
+		
+		<div class="navigation-list">
+			<div class="navigation-ms">
+				<div class="zj">
+					<div class="dleft"><p class="p1">文物名称</p>	</div>
+					<div class="dright"><img src="images/播放标志@2x.png" /></div>
+				</div>							
+				<img src="images/cp1.png" />
+				<div class="zj1">
+					<div class="dleft"><p class="p1">文物名称</p></div>	
+					<div class="dright"><img src="images/播放标志@2x.png" /></div>
+				</div>							
+				<img src="images/cp2.png" />
+				<div class="zj2">
+					<div class="dleft"><p class="p1">文物名称</p>	</div>
+					<div class="dright"><img src="images/播放标志@2x.png" /></div>
+				</div>							
+				<img src="images/cp3.png" />
+			</div>
+			<div class="navigation-ms">
+				<div class="zj">
+					<div class="dleft"><p class="p1">文物名称</p></div>	
+					<div class="dright"><img src="images/播放标志@2x.png" /></div>
+				</div>							
+				<img src="images/cp1.png" />
+				<div class="zj1">
+					<div class="dleft"><p class="p1">文物名称</p>	</div>
+					<div class="dright"><img src="images/播放标志@2x.png" /></div>
+				</div>							
+				<img src="images/cp2.png" />
+				<div class="zj2">
+					<div class="dleft"><p class="p1">文物名称</p>	</div>
+					<div class="dright"><img src="images/播放标志@2x.png" /></div>
+				</div>							
+				<img src="images/cp3.png" />
+			</div>
+		</div>
+		
+		
+       <div class="row bgcol-hr" style="height: 10px;"></div>
+		 <div class="bgcol-footer">
+			<a href="#">更多...</a>
+		</div>
+		<div class="row bgcol-float col-white">
+			<div class="logo">
+			<img src="images/logo.png" />
+			<span style="position:absolute;margin-left:5px;margin-top:7px;font-size:18px;color:#fff;">赛导游</span>
+			<span style="position:absolute;margin-left:5px;margin-top:34px;font-size:14px;color:#eee;">听讲解，就用赛导游</span>
+			<button class="float-btn" type="button">打开APP</button>
+			</div>
+	    </div>
+		<div style="width:100%;height:60px;"></div>
+    </div>
+	</section>
+
+<script src="js/jquery-ui-1.8.17.custom.min.js"></script>
+
+<script>
+	(function($){
+		// Settings
+		var audioplayer=$("#audioplayer").val();
+		var repeat = localStorage.repeat || 0,
+			shuffle = localStorage.shuffle || 'false',
+			continous = true,
+			autoplay = true,//是否直接播放
+			playlist = [
+				{
+				title: '德国第一装甲师进行曲',
+				artist: '德国',
+				album: '德国第一装甲师进行曲.mp3',
+				cover:'player/img/1.jpg',
+				mp3: audioplayer,/*'player/mp3/deguo.mp3'*/
+				ogg: ''
+				}
+				
+			];
+			
+		// Load playlist
+		for (var i=0; i<playlist.length; i++){
+			var item = playlist[i];
+			$('#playlist').append('<li>'+item.artist+' - '+item.title+'</li>');
+		}
+
+		var time = new Date(),
+			currentTrack = shuffle === 'true' ? time.getTime() % playlist.length : 0,
+			trigger = false,
+			audio, timeout, isPlaying, playCounts;
+		
+		//音频播放
+		var play = function(){
+			audio.play();
+			$('.playback').addClass('playing');
+			timeout = setInterval(updateProgress, 500);
+			isPlaying = true;
+		}
+		
+		//暂停
+		var pause = function(){
+			audio.pause();
+			$('.playback').removeClass('playing');
+			clearInterval(updateProgress);
+			isPlaying = false;
+		}
+
+		// Update progress
+		var setProgress = function(value){
+			var currentSec = parseInt(value%60) < 10 ? '0' + parseInt(value%60) : parseInt(value%60),
+				ratio = value / audio.duration * 100;
+
+			$('.timer').html(parseInt(value/60)+':'+currentSec);
+			$('.progress .pace').css('width', ratio + '%');
+			$('.progress .slider a').css('left', ratio + '%');
+		}
+
+		var updateProgress = function(){
+			setProgress(audio.currentTime);
+		}
+
+		// Progress slider
+		$('.progress .slider').slider({step: 0.1, slide: function(event, ui){
+			$(this).addClass('enable');
+			setProgress(audio.duration * ui.value / 100);
+			clearInterval(timeout);
+		}, stop: function(event, ui){
+			audio.currentTime = audio.duration * ui.value / 100;
+			$(this).removeClass('enable');
+			timeout = setInterval(updateProgress, 500);
+		}});
+
+		// Volume slider
+		var setVolume = function(value){
+			audio.volume = localStorage.volume = value;
+			$('.volume .pace').css('width', value * 100 + '%');
+			$('.volume .slider a').css('left', value * 100 + '%');
+		}
+
+		var volume = localStorage.volume || 0.5;
+		$('.volume .slider').slider({max: 1, min: 0, step: 0.01, value: volume, slide: function(event, ui){
+			setVolume(ui.value);
+			$(this).addClass('enable');
+			$('.mute').removeClass('enable');
+		}, stop: function(){
+			$(this).removeClass('enable');
+		}}).children('.pace').css('width', volume * 100 + '%');
+
+		$('.mute').click(function(){
+			if ($(this).hasClass('enable')){
+				setVolume($(this).data('volume'));
+				$(this).removeClass('enable');
+			} else {
+				$(this).data('volume', audio.volume).addClass('enable');
+				setVolume(0);
+			}
+		});
+
+		// Switch track
+		var switchTrack = function(i){
+			if (i < 0){
+				track = currentTrack = playlist.length - 1;
+			} else if (i > playlist.length){
+				track = currentTrack = 0;
+			} else {
+				track = i;
+			}
+			$('audio').remove();
+			loadMusic(track);
+			if (isPlaying == true) play();
+			
+		}
+
+		// Shuffle 拖曳
+		var shufflePlay = function(){
+			var time = new Date(),
+				lastTrack = currentTrack;
+			currentTrack = time.getTime() % playlist.length;
+			if (lastTrack == currentTrack) ++currentTrack;
+			switchTrack(currentTrack);
+		}
+
+		// Fire when track ended
+		var ended = function(){
+			pause();
+			audio.currentTime = 0;
+			playCounts++;
+			if (continous == true) isPlaying = true;
+			if (repeat == 1){
+				play();
+			} else {
+				if (shuffle === 'true'){
+					shufflePlay();
+				} else {
+					if (repeat == 2){
+						switchTrack(++currentTrack);
+					} else {
+						if (currentTrack < playlist.length) switchTrack(++currentTrack);
+					}
+				}
+			}
+		}
+
+		var beforeLoad = function(){
+			var endVal = this.seekable && this.seekable.length ? this.seekable.end(0) : 0;
+			$('.progress .loaded').css('width', (100 / (this.duration || 1) * endVal) +'%');
+			if(parseInt(this.duration)<60){
+				$("#endtime").html("0:"+parseInt(this.duration));
+			}else{
+				var minute = parseInt(parseInt(this.duration)/60);
+				var second = parseInt(this.duration)%60;
+				$("#endtime").html(minute+":"+second);
+			}
+		}
+	
+		// Fire when track loaded completely  加载完成 play(); pause();
+		var afterLoad = function(){
+			if(parseInt(this.duration)<60){
+				$("#endtime").html("0:"+parseInt(this.duration));
+			}else{
+				var minute = parseInt(parseInt(this.duration)/60);
+				var second = parseInt(this.duration)%60;
+				$("#endtime").html(minute+":"+second);
+			}
+			
+			if (autoplay == true) play();
+		}
+
+		// Load track
+		var loadMusic = function(i){
+			var item = playlist[i],
+				newaudio = $('<audio>').html('<source src="'+item.mp3+'"><source src="'+item.ogg+'">').appendTo('#player');
+			
+			$('.cover').html('<img src="'+item.cover+'" alt="'+item.album+'">');
+			$('.tag').html('<strong>'+item.title+'</strong><span class="artist">'+item.artist+'</span><span class="album">'+item.album+'</span>');
+			$('#playlist li').removeClass('playing').eq(i).addClass('playing');
+			audio = newaudio[0];
+			audio.volume = $('.mute').hasClass('enable') ? 0 : volume;
+			audio.addEventListener('progress', beforeLoad, false);
+			audio.addEventListener('durationchange', beforeLoad, false);
+			audio.addEventListener('canplay', afterLoad, false);
+			audio.addEventListener('ended', ended, false);
+		}
+
+		loadMusic(currentTrack);
+		$('.playback').on('click', function(){
+			if ($(this).hasClass('playing')){
+				pause();
+			} else {
+				play();
+			}
+		});
+		$('.rewind').on('click', function(){
+			if (shuffle === 'true'){
+				shufflePlay();
+			} else {
+				switchTrack(--currentTrack);
+			}
+		});
+		$('.fastforward').on('click', function(){
+			if (shuffle === 'true'){
+				shufflePlay();
+			} else {
+				switchTrack(++currentTrack);
+			}
+		});
+		$('#playlist li').each(function(i){
+			var _i = i;
+			$(this).on('click', function(){
+				switchTrack(_i);
+			});
+		});
+
+		if (shuffle === 'true') $('.shuffle').addClass('enable');
+		if (repeat == 1){
+			$('.repeat').addClass('once');
+		} else if (repeat == 2){
+			$('.repeat').addClass('all');
+		}
+
+		$('.repeat').on('click', function(){
+			if ($(this).hasClass('once')){
+				repeat = localStorage.repeat = 2;
+				$(this).removeClass('once').addClass('all');
+			} else if ($(this).hasClass('all')){
+				repeat = localStorage.repeat = 0;
+				$(this).removeClass('all');
+			} else {
+				repeat = localStorage.repeat = 1;
+				$(this).addClass('once');
+			}
+		});
+
+		$('.shuffle').on('click', function(){
+			if ($(this).hasClass('enable')){
+				shuffle = localStorage.shuffle = 'false';
+				$(this).removeClass('enable');
+			} else {
+				shuffle = localStorage.shuffle = 'true';
+				$(this).addClass('enable');
+			}
+		});
+	})(jQuery);
+</script>
+</body>
+</html>
